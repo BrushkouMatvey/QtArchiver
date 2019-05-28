@@ -29,11 +29,6 @@ private:
     QStringList filesToDecompress;
     QString pathsForQLineEdit;
 
-private:
-    void decompressLZW(QString &lzwFileName, QString &decompressFileName);
-    void decompressHuffman(QString &lzwFileName, QString &decompressFileName);
-    void createTableLZW(std::map<int, std::string> &table);
-    void readAllBytesFromLzwFile(QString fileName, std::vector<int> &info);
 };
 
 #endif // EXTRACT_WINDOW_H

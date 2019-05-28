@@ -23,7 +23,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     createFileSystemModel();
     setQLineEditToToolBar();
-    //toolBarTextBeforeChanged = toolBarLineEdit->text();
     connect(toolBarLineEdit, SIGNAL(returnPressed()),this, SLOT(EnterPressed()));
     connect(this->ui->actionUp_on_level, SIGNAL(triggered()), this, SLOT(upOnLevel()));
 }
@@ -135,3 +134,22 @@ void MainWindow::synchronizeListFromEdit()
     }
 }
 
+
+void MainWindow::on_actionDelete_file_triggered()
+{
+    if(toolBarLineEdit->text() == "" || toolBarLineEdit->text() == "C:/"||toolBarLineEdit->text() == "D:/")
+        return;
+
+    QFileInfo fileInfo(toolBarLineEdit->text());
+
+    if(fileInfo.isDir())
+    {
+        QDir dir(toolBarLineEdit->text());
+        dir.removeRecursively();
+    }
+    else if (fileInfo.isFile())
+    {
+        QDir dir(toolBarLineEdit->text());
+        dir.remove(toolBarLineEdit->text());
+    }
+}

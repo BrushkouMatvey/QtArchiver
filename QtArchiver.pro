@@ -30,12 +30,16 @@ SOURCES += \
         src/main.cpp \
         src/mainwindow.cpp \
         src/add_window.cpp \
-        src/extract_window.cpp
+        src/extract_window.cpp \
+    src/lzw.cpp \
+    src/huffman.cpp
 
 HEADERS += \
         src/mainwindow.h \
         src/add_window.h \
-        src/extract_window.h
+        src/extract_window.h \
+    src/lzw.h \
+    src/huffman.h
 
 FORMS += \
         ui/mainwindow.ui \

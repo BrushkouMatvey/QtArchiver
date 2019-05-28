@@ -29,15 +29,8 @@ private:
     QStringList fileNames;
 
 private:
-    void readAllBytesLZW(QString fileName, std::vector<char> &info);
-    void writeCompressDataLZW(QString fileName, std::vector<int> &info);
-    void createTableLZW(std::map <std::string, int> &table);
-
-    void compressLZW(QString &compressFileName, QString &lzwFileName);
 
     void compressHuffman(QString &compressFileName, QString &lzwFileName);
-
-    void readAllBytesFromLzwFile(QString fileName, std::vector<int> &info);
 
 };
 

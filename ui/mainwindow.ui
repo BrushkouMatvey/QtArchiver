@@ -24,55 +24,6 @@
     </item>
    </layout>
   </widget>
-  <widget class="QMenuBar" name="menuBar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>1082</width>
-     <height>25</height>
-    </rect>
-   </property>
-   <widget class="QMenu" name="menuFile">
-    <property name="title">
-     <string>File</string>
-    </property>
-    <addaction name="actionOpen_archive"/>
-    <addaction name="actionSave_archive_copy_as"/>
-    <addaction name="actionChange_drive"/>
-    <addaction name="actionSet_default_password"/>
-    <addaction name="separator"/>
-    <addaction name="actionCopy_files_to_clipboard"/>
-    <addaction name="actionPaste_files_from_clipboard"/>
-    <addaction name="separator"/>
-    <addaction name="actionSelect_all"/>
-    <addaction name="actionSelect_group"/>
-    <addaction name="actionDeselect_group"/>
-    <addaction name="separator"/>
-    <addaction name="actionExit"/>
-   </widget>
-   <widget class="QMenu" name="menuCommands">
-    <property name="title">
-     <string>Commands</string>
-    </property>
-    <addaction name="actionAdd_files_to_archive"/>
-    <addaction name="actionExtract_to"/>
-    <addaction name="separator"/>
-    <addaction name="actionView_file"/>
-    <addaction name="actionDelete_file"/>
-    <addaction name="actionRename_file"/>
-    <addaction name="actionUp_on_level"/>
-   </widget>
-   <widget class="QMenu" name="menuHelp">
-    <property name="title">
-     <string>Help</string>
-    </property>
-    <addaction name="actionAbout_QtArchive"/>
-   </widget>
-   <addaction name="menuFile"/>
-   <addaction name="menuCommands"/>
-   <addaction name="menuHelp"/>
-  </widget>
   <widget class="QToolBar" name="mainToolBar">
    <property name="toolButtonStyle">
     <enum>Qt::ToolButtonTextUnderIcon</enum>

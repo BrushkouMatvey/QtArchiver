@@ -1,5 +1,6 @@
 #include "src/add_window.h"
 #include "ui_add_window.h"
+#include "src/lzw.h"
 #include <QFileDialog>
 #include <QDebug>
 #include <QMessageBox>
@@ -80,84 +81,7 @@ void Add_window::on_Ok_clicked()
     }
 }
 
-void Add_window::readAllBytesLZW(QString fileName, vector<char> &info)
-{
-    ifstream file(fileName.toLocal8Bit().constData(), ios::binary | ios::ate);
-    if (file.is_open())
-    {
-        ifstream::pos_type pos = file.tellg();
-        info.resize(pos);
-        file.seekg(0, ios::beg);
-        file.read(&info[0], pos);
-    }
-    else
-    {
-        QMessageBox msgBox(QMessageBox::Warning, "Error", "Unable to open file");
-        msgBox.setWindowFlags(Qt::Dialog | Qt::CustomizeWindowHint | Qt::WindowTitleHint | Qt::WindowCloseButtonHint);
-        msgBox.exec();
-    }
-    file.close();
-}
 
-void Add_window:: writeCompressDataLZW(QString fileName, vector<int> &info)
-{
-    ofstream file(fileName.toLocal8Bit().constData(), ios::binary);
-    if (file.is_open())
-    {
-        file.write((char*)&info[0], info.size() * sizeof(int));
-    }
-    else
-    {
-        QMessageBox msgBox(QMessageBox::Warning, "Error", "Unable to open file");
-        msgBox.setWindowFlags(Qt::Dialog | Qt::CustomizeWindowHint | Qt::WindowTitleHint | Qt::WindowCloseButtonHint);
-        msgBox.exec();
-    }
-    file.close();
-}
-
-void Add_window::createTableLZW(map<string, int> &table)
-{
-    for(int i = 0; i <= 255; i++)
-    {
-        string str = "";
-        str += char(i);
-        table[str] = i;
-    }
-}
-
-void Add_window::compressLZW(QString &compressFileName, QString &lzwFileName)
-{
-    map<string, int> table;
-    vector<char> info;
-    readAllBytesLZW(compressFileName, info);
-    createTableLZW(table);
-
-    string p = "";
-    string c = "";
-    p += info[0];
-    int code = table.size();
-    vector<int> compressData;
-    for (int i = 0; i < info.size(); i++)
-    {
-        if (i != info.size() - 1)
-            c += info[i + 1];
-        if (table.find(p + c) != table.end())
-        {
-            p = p + c;
-        }
-        else
-        {
-            compressData.push_back(table[p]);
-            table[p + c] = code;
-            code++;
-            p = c;
-        }
-        c = "";
-    }
-    compressData.push_back(table[p]);
-
-    writeCompressDataLZW(lzwFileName, compressData);
-}
 
 void Add_window::compressHuffman(QString &compressFileName, QString &lzwFileName)
 {

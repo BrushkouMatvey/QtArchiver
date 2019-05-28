@@ -39,6 +39,8 @@ private slots:
     void on_listView_doubleClicked(const QModelIndex &index);
     void EnterPressed();
     void upOnLevel();
+    void on_actionDelete_file_triggered();
+
 
 
 private:
