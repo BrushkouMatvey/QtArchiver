@@ -16,16 +16,24 @@ public:
     ~Extract_window();
 
 private slots:
-    void on_pushButton_clicked();
 
     void on_BrowseButton_clicked();
 
     void on_AppendButton_clicked();
 
+    void on_OK_clicked();
+
 private:
     Ui::Extract_window *ui;
     QString direct;
     QStringList filesToDecompress;
+    QString pathsForQLineEdit;
+
+private:
+    void decompressLZW(QString &lzwFileName, QString &decompressFileName);
+    void decompressHuffman(QString &lzwFileName, QString &decompressFileName);
+    void createTableLZW(std::map<int, std::string> &table);
+    void readAllBytesFromLzwFile(QString fileName, std::vector<int> &info);
 };
 
 #endif // EXTRACT_WINDOW_H

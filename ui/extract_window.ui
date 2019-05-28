@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>782</width>
-    <height>435</height>
+    <width>602</width>
+    <height>361</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -33,7 +33,7 @@
         <widget class="QLineEdit" name="BrowseLineEdit"/>
        </item>
        <item>
-        <widget class="QLineEdit" name="lineEdit"/>
+        <widget class="QLineEdit" name="AppendLineEdit"/>
        </item>
       </layout>
      </item>
@@ -70,14 +70,17 @@
     </layout>
    </item>
    <item>
-    <widget class="QRadioButton" name="LZW">
+    <widget class="QRadioButton" name="LZWRadioButton">
      <property name="text">
       <string>LZW decompress</string>
+     </property>
+     <property name="checked">
+      <bool>true</bool>
      </property>
     </widget>
    </item>
    <item>
-    <widget class="QRadioButton" name="Huffman">
+    <widget class="QRadioButton" name="HuffmanRadioButton">
      <property name="text">
       <string>Huffman decompress</string>
      </property>

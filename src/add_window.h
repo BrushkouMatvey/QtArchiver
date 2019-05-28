@@ -2,10 +2,6 @@
 #define ADD_WINDOW_H
 
 #include <QDialog>
-#include <QFile>
-#include <string>
-#include <vector>
-#include <map>
 
 namespace Ui {
 class Add_window;
@@ -34,14 +30,15 @@ private:
 
 private:
     void readAllBytesLZW(QString fileName, std::vector<char> &info);
-    void writeCompressData(QString fileName, std::vector<int> &info);
-    void createTable(std::map <std::string, int> &table);
+    void writeCompressDataLZW(QString fileName, std::vector<int> &info);
+    void createTableLZW(std::map <std::string, int> &table);
 
     void compressLZW(QString &compressFileName, QString &lzwFileName);
-    void decompressLZW(QString &lzwFileName, QString &decompressFileName);
 
     void compressHuffman(QString &compressFileName, QString &lzwFileName);
-    void decompressHuffman(QString &lzwFileName, QString &decompressFileName);
+
+    void readAllBytesFromLzwFile(QString fileName, std::vector<int> &info);
+
 };
 
 #endif // ADD_WINDOW_H

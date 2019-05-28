@@ -1,6 +1,5 @@
 #include "src/add_window.h"
 #include "ui_add_window.h"
-#include "src/compressor.h"
 #include <QFileDialog>
 #include <QDebug>
 #include <QMessageBox>
@@ -55,7 +54,8 @@ void Add_window::on_Ok_clicked()
     else
     {
         QDir dir(this->ui->BrowseLineEdit->text());
-        if (!dir.exists()){
+        if (!dir.exists())
+        {
           dir.mkdir(".");
         }
 
@@ -64,7 +64,7 @@ void Add_window::on_Ok_clicked()
             for(auto it:filesToCompress)
             {
                 QString tempDir = direct;
-                QString lzwFileName = tempDir.append(it.split(":").back().split(".").front().append(".lzw"));
+                QString lzwFileName = tempDir.append(it.split("/").back().split(".").front().append(".lzw").prepend("/"));
                 compressLZW(it, lzwFileName);
             }
         }
@@ -73,7 +73,7 @@ void Add_window::on_Ok_clicked()
             for(auto it:filesToCompress)
             {
                 QString tempDir = direct;
-                QString huffmanFileName = tempDir.append(it.split(":").back().split(".").front().append(".huf"));
+                QString huffmanFileName =  tempDir.append(it.split("/").back().split(".").front().append(".huf").prepend("/"));
                 compressLZW(it, huffmanFileName);
             }
         }
@@ -92,7 +92,6 @@ void Add_window::readAllBytesLZW(QString fileName, vector<char> &info)
     }
     else
     {
-        qDebug()<<"ERROR1";
         QMessageBox msgBox(QMessageBox::Warning, "Error", "Unable to open file");
         msgBox.setWindowFlags(Qt::Dialog | Qt::CustomizeWindowHint | Qt::WindowTitleHint | Qt::WindowCloseButtonHint);
         msgBox.exec();
@@ -100,7 +99,7 @@ void Add_window::readAllBytesLZW(QString fileName, vector<char> &info)
     file.close();
 }
 
-void Add_window:: writeCompressData(QString fileName, vector<int> &info)
+void Add_window:: writeCompressDataLZW(QString fileName, vector<int> &info)
 {
     ofstream file(fileName.toLocal8Bit().constData(), ios::binary);
     if (file.is_open())
@@ -116,13 +115,13 @@ void Add_window:: writeCompressData(QString fileName, vector<int> &info)
     file.close();
 }
 
-void Add_window::createTable(map<string, int> &table)
+void Add_window::createTableLZW(map<string, int> &table)
 {
     for(int i = 0; i <= 255; i++)
     {
-        string ch = "";
-        ch += char(i);
-        table[ch] = i;
+        string str = "";
+        str += char(i);
+        table[str] = i;
     }
 }
 
@@ -131,7 +130,7 @@ void Add_window::compressLZW(QString &compressFileName, QString &lzwFileName)
     map<string, int> table;
     vector<char> info;
     readAllBytesLZW(compressFileName, info);
-    createTable(table);
+    createTableLZW(table);
 
     string p = "";
     string c = "";
@@ -156,23 +155,14 @@ void Add_window::compressLZW(QString &compressFileName, QString &lzwFileName)
         c = "";
     }
     compressData.push_back(table[p]);
-    writeCompressData(lzwFileName, compressData);
-}
 
-
-
-
-void Add_window::decompressLZW(QString &lzwFileName, QString &decompressFileName)
-{
-
+    writeCompressDataLZW(lzwFileName, compressData);
 }
 
 void Add_window::compressHuffman(QString &compressFileName, QString &lzwFileName)
 {
 
 }
-void Add_window::decompressHuffman(QString &lzwFileName, QString &decompressFileName)
-{
 
-}
+
 
