@@ -14,7 +14,7 @@
    <string>QtArchiver</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="resources.qrc">
+   <iconset resource="../resources.qrc">
     <normaloff>:/images/img/data-storage.png</normaloff>:/images/img/data-storage.png</iconset>
   </property>
   <widget class="QWidget" name="centralWidget">
@@ -88,7 +88,6 @@
    <addaction name="actionView_file"/>
    <addaction name="actionDelete_file"/>
    <addaction name="separator"/>
-   <addaction name="actionUp_on_level"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <widget class="QToolBar" name="subToolBar">
@@ -110,6 +109,7 @@
    <attribute name="toolBarBreak">
     <bool>true</bool>
    </attribute>
+   <addaction name="actionUp_on_level"/>
   </widget>
   <action name="actionOpen_archive">
    <property name="text">
@@ -181,7 +181,7 @@
   </action>
   <action name="actionAdd_files_to_archive">
    <property name="icon">
-    <iconset resource="resources.qrc">
+    <iconset resource="../resources.qrc">
      <normaloff>:/images/img/Add.png</normaloff>:/images/img/Add.png</iconset>
    </property>
    <property name="text">
@@ -196,7 +196,7 @@
   </action>
   <action name="actionExtract_to">
    <property name="icon">
-    <iconset resource="resources.qrc">
+    <iconset resource="../resources.qrc">
      <normaloff>:/images/img/ExtractTo.png</normaloff>:/images/img/ExtractTo.png</iconset>
    </property>
    <property name="text">
@@ -208,7 +208,7 @@
   </action>
   <action name="actionView_file">
    <property name="icon">
-    <iconset resource="resources.qrc">
+    <iconset resource="../resources.qrc">
      <normaloff>:/images/img/View.png</normaloff>:/images/img/View.png</iconset>
    </property>
    <property name="text">
@@ -223,7 +223,7 @@
   </action>
   <action name="actionDelete_file">
    <property name="icon">
-    <iconset resource="resources.qrc">
+    <iconset resource="../resources.qrc">
      <normaloff>:/images/img/Delete.png</normaloff>:/images/img/Delete.png</iconset>
    </property>
    <property name="text">
@@ -248,8 +248,8 @@
   </action>
   <action name="actionUp_on_level">
    <property name="icon">
-    <iconset resource="resources.qrc">
-     <normaloff>:/images/img/Up on level.png</normaloff>:/images/img/Up on level.png</iconset>
+    <iconset resource="../resources.qrc">
+     <normaloff>:/images/img/Arrow.png</normaloff>:/images/img/Arrow.png</iconset>
    </property>
    <property name="text">
     <string>Up on level</string>
@@ -261,7 +261,7 @@
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources>
-  <include location="resources.qrc"/>
+  <include location="../resources.qrc"/>
  </resources>
  <connections/>
 </ui>

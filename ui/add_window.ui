@@ -14,7 +14,7 @@
    <string>Archive name</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="resources.qrc">
+   <iconset resource="../resources.qrc">
     <normaloff>:/images/img/Add.png</normaloff>:/images/img/Add.png</iconset>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -38,7 +38,7 @@
         <widget class="QLineEdit" name="BrowseLineEdit"/>
        </item>
        <item>
-        <widget class="QLineEdit" name="lineEdit"/>
+        <widget class="QLineEdit" name="AppendLineEdit"/>
        </item>
       </layout>
      </item>
@@ -86,6 +86,23 @@
     </layout>
    </item>
    <item>
+    <widget class="QRadioButton" name="LZWRadioButton">
+     <property name="text">
+      <string>LZW (for .txt files)</string>
+     </property>
+     <property name="checked">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QRadioButton" name="HuffmanRadioButton">
+     <property name="text">
+      <string>Huffman (for images)</string>
+     </property>
+    </widget>
+   </item>
+   <item>
     <spacer name="verticalSpacer">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
@@ -120,19 +137,12 @@
        </property>
       </widget>
      </item>
-     <item>
-      <widget class="QPushButton" name="Cancel">
-       <property name="text">
-        <string>Cancel</string>
-       </property>
-      </widget>
-     </item>
     </layout>
    </item>
   </layout>
  </widget>
  <resources>
-  <include location="resources.qrc"/>
+  <include location="../resources.qrc"/>
  </resources>
  <connections/>
 </ui>

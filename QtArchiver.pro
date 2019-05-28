@@ -29,20 +29,18 @@ CONFIG += c++11
 SOURCES += \
         src/main.cpp \
         src/mainwindow.cpp \
-    src/add_window.cpp \
-    src/extract_window.cpp \
-    src/archiver.cpp
+        src/add_window.cpp \
+        src/extract_window.cpp
 
 HEADERS += \
         src/mainwindow.h \
-    src/add_window.h \
-    src/extract_window.h \
-    src/archiver.h
+        src/add_window.h \
+        src/extract_window.h
 
 FORMS += \
-        mainwindow.ui \
-    add_window.ui \
-    extract_window.ui
+        ui/mainwindow.ui \
+        ui/add_window.ui \
+        ui/extract_window.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -50,4 +48,4 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 RESOURCES += \
-    resources.qrc
+        resources.qrc

@@ -15,12 +15,22 @@ Extract_window::~Extract_window()
     delete ui;
 }
 
-void Extract_window::on_pushButton_clicked()
+void Extract_window::on_BrowseButton_clicked()
 {
-    directory = QFileDialog::getExistingDirectory(this,
-                               tr("Find Files"), QDir::currentPath());
-    if (!directory.isEmpty())
-    {
-        ui->BrowseLineEdit->setText(directory);
-    }
+    direct = QFileDialog::getExistingDirectory(this, tr("Open Directory"),
+                                                "/home",
+                                                QFileDialog::ShowDirsOnly
+                                                | QFileDialog::DontResolveSymlinks);
+    this->ui->BrowseLineEdit->setText(direct);
+}
+
+void Extract_window::on_AppendButton_clicked()
+{
+    if(this->ui->LZW->isChecked())
+        filesToDecompress = QFileDialog::getOpenFileNames(this, "ChooseFile(s) to archive","D:\\","LZW files (*.lzw)");
+    else
+        filesToDecompress = QFileDialog::getOpenFileNames(this, "ChooseFile(s) to archive","D:\\","HUF files (*.huf)");
+
+    pathsForQLineEdit = filesToDecompress.join(";");
+    this->ui->AppendLineEdit->setText(pathsForQLineEdit);
 }

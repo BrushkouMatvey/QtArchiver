@@ -14,7 +14,7 @@
    <string>Extract to...</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="resources.qrc">
+   <iconset resource="../resources.qrc">
     <normaloff>:/images/img/ExtractTo.png</normaloff>:/images/img/ExtractTo.png</iconset>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -48,7 +48,7 @@
           </font>
          </property>
          <property name="text">
-          <string>Browse folder</string>
+          <string>Browse</string>
          </property>
         </widget>
        </item>
@@ -61,13 +61,27 @@
           </font>
          </property>
          <property name="text">
-          <string>Append...</string>
+          <string>Append..</string>
          </property>
         </widget>
        </item>
       </layout>
      </item>
     </layout>
+   </item>
+   <item>
+    <widget class="QRadioButton" name="LZW">
+     <property name="text">
+      <string>LZW decompress</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QRadioButton" name="Huffman">
+     <property name="text">
+      <string>Huffman decompress</string>
+     </property>
+    </widget>
    </item>
    <item>
     <spacer name="verticalSpacer">
@@ -116,7 +130,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="resources.qrc"/>
+  <include location="../resources.qrc"/>
  </resources>
  <connections/>
 </ui>

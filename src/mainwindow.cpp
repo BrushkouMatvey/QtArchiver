@@ -23,7 +23,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     createFileSystemModel();
     setQLineEditToToolBar();
-    toolBarTextBeforeChanged = toolBarTextAfterChanged = toolBarLineEdit->text();
+    //toolBarTextBeforeChanged = toolBarLineEdit->text();
     connect(toolBarLineEdit, SIGNAL(returnPressed()),this, SLOT(EnterPressed()));
     connect(this->ui->actionUp_on_level, SIGNAL(triggered()), this, SLOT(upOnLevel()));
 }
@@ -50,6 +50,7 @@ void MainWindow::createFileSystemModel()
     model = new QFileSystemModel(this);
     model->setFilter(QDir::AllEntries);
     model->setRootPath("");
+    this->ui->listView->setSelectionMode(QAbstractItemView::ExtendedSelection);
     this->ui->listView->setModel(model);
 }
 

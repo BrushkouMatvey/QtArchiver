@@ -49,7 +49,6 @@ private:
     QLineEdit *toolBarLineEdit;
     QWidget *spacer;
     QString toolBarTextBeforeChanged;
-    QString toolBarTextAfterChanged;
 };
 
 #endif // MAINWINDOW_H

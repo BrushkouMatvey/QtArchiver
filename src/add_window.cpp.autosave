@@ -1,6 +1,5 @@
 #include "src/add_window.h"
 #include "ui_add_window.h"
-#include "src/compressor.h"
 #include <QFileDialog>
 #include <QDebug>
 #include <QMessageBox>

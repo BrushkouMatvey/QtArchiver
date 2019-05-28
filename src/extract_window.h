@@ -18,9 +18,14 @@ public:
 private slots:
     void on_pushButton_clicked();
 
+    void on_BrowseButton_clicked();
+
+    void on_AppendButton_clicked();
+
 private:
     Ui::Extract_window *ui;
-    QString directory;
+    QString direct;
+    QStringList filesToDecompress;
 };
 
 #endif // EXTRACT_WINDOW_H

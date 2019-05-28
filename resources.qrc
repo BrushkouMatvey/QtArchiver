@@ -6,5 +6,6 @@
         <file>img/Up on level.png</file>
         <file>img/View.png</file>
         <file>img/data-storage.png</file>
+        <file>img/Arrow.png</file>
     </qresource>
 </RCC>
