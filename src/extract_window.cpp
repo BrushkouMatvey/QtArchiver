@@ -1,5 +1,4 @@
 #include "src/extract_window.h"
-#include "src/lzw.h"
 #include "ui_extract_window.h"
 #include <QFileDialog>
 #include <QMessageBox>
@@ -38,9 +37,12 @@ void Extract_window::on_AppendButton_clicked()
     {
         filesToDecompress = QFileDialog::getOpenFileNames(this, "ChooseFile(s) to decompress","D:\\","LZW files (*.lzw)");
     }
-    else
+    else if(this->ui->RLERadioButton->isChecked())
     {
-        filesToDecompress = QFileDialog::getOpenFileNames(this, "ChooseFile(s) to decompress","D:\\","HUF files (*.huf)");
+        filesToDecompress = QFileDialog::getOpenFileNames(this, "ChooseFile(s) to decompress","D:\\","HUF files (*.rle)");
+    }
+    else {
+       filesToDecompress = QFileDialog::getOpenFileNames(this, "ChooseFile(s) to decompress","D:\\","HUF files (*.huf)");
     }
     pathsForQLineEdit = filesToDecompress.join(";");
     this->ui->AppendLineEdit->setText(pathsForQLineEdit);
@@ -65,20 +67,29 @@ void Extract_window::on_OK_clicked()
         }
         if(this->ui->LZWRadioButton->isChecked())
         {
+            CompressorLZW compressorLzw;
             for(auto it:filesToDecompress)
             {
                 QString tempDir = direct;
-                QString lzwDecompressFileName = tempDir.append(it.split("/").back().split(".").front().append(".txt").prepend("/"));
-                decompressLZW(it, lzwDecompressFileName);
+                QString lzwDecompressFileName = tempDir.append(it.split("/").back().split(".").front().append("decompress.txt").prepend("/"));
+                compressorLzw.decompressLZW(it, lzwDecompressFileName);
             }
         }
-        else
+        else if(this->ui->RLERadioButton->isChecked())
         {
             for(auto it:filesToDecompress)
             {
                 QString tempDir = direct;
-                QString huffmanDecompressFileName =  tempDir.append(it.split("/").back().split(".").front().append(".txt").prepend("/"));
-                decompressHuffman(it, huffmanDecompressFileName);
+                QString huffmanDecompressFileName =  tempDir.append(it.split("/").back().split(".").front().append("decompress.txt").prepend("/"));
+                compressorRle.decompressRLE(it, huffmanDecompressFileName);
+            }
+        }
+        else {
+            for(auto it:filesToDecompress)
+            {
+                QString tempDir = direct;
+                QString huffmanDecompressFileName =  tempDir.append(it.split("/").back().split(".").front().append("decompress.txt").prepend("/"));
+                compressorHuf.decompressHuffman(it, huffmanDecompressFileName);
             }
         }
     }

@@ -1,6 +1,5 @@
 #include "src/add_window.h"
 #include "ui_add_window.h"
-#include "src/lzw.h"
 #include <QFileDialog>
 #include <QDebug>
 #include <QMessageBox>
@@ -34,10 +33,7 @@ void Add_window::on_BrowseButton_clicked()
 
 void Add_window::on_AppendButton_clicked()
 {
-    if(this->ui->LZWRadioButton->isChecked())
-        filesToCompress = QFileDialog::getOpenFileNames(this, "ChooseFile(s) to archive","D:\\","Text Files (*.txt *.cpp *.h *.rtf)");
-    else
-        filesToCompress = QFileDialog::getOpenFileNames(this, "ChooseFile(s) to archive","D:\\","Images (*.jpg *.png)");
+    filesToCompress = QFileDialog::getOpenFileNames(this, "ChooseFile(s) to archive","D:\\","Text Files (*.txt *.cpp *.docx *.rtf)");
 
     pathsForQLineEdit = filesToCompress.join(";");
     this->ui->AppendLineEdit->setText(pathsForQLineEdit);
@@ -66,7 +62,16 @@ void Add_window::on_Ok_clicked()
             {
                 QString tempDir = direct;
                 QString lzwFileName = tempDir.append(it.split("/").back().split(".").front().append(".lzw").prepend("/"));
-                compressLZW(it, lzwFileName);
+                compressorLzw.compressLZW(it, lzwFileName);
+            }
+        }
+        else if(this->ui->RLERadioButton->isChecked())
+        {
+            for(auto it:filesToCompress)
+            {
+                QString tempDir = direct;
+                QString rleFileName =  tempDir.append(it.split("/").back().split(".").front().append(".rle").prepend("/"));
+                compressorRle.compressRLE(it, rleFileName);
             }
         }
         else
@@ -75,18 +80,12 @@ void Add_window::on_Ok_clicked()
             {
                 QString tempDir = direct;
                 QString huffmanFileName =  tempDir.append(it.split("/").back().split(".").front().append(".huf").prepend("/"));
-                compressLZW(it, huffmanFileName);
+                compressorHuf.compressHuffman(it, huffmanFileName);
             }
         }
     }
 }
 
-
-
-void Add_window::compressHuffman(QString &compressFileName, QString &lzwFileName)
-{
-
-}
 
 
 

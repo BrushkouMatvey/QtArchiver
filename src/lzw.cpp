@@ -6,7 +6,8 @@
 #include <fstream>
 using namespace std;
 
-void readAllBytesLZWtextFile(QString &fileName, vector<char> &info)
+
+void CompressorLZW::readAllBytestextFile(QString &fileName, vector<char> &info)
 {
     ifstream file(fileName.toStdString(), ios::binary | ios::ate);
     if (file.is_open())
@@ -25,7 +26,7 @@ void readAllBytesLZWtextFile(QString &fileName, vector<char> &info)
     file.close();
 }
 
-void writeCompressDataLZW(QString &fileName, vector<int> &info)
+void CompressorLZW::writeCompressDataLZW(QString &fileName, vector<int> &info)
 {
     ofstream file(fileName.toStdString(), ios::binary);
     if (file.is_open())
@@ -41,7 +42,7 @@ void writeCompressDataLZW(QString &fileName, vector<int> &info)
     file.close();
 }
 
-void createTableLZWcompress(map<string, int> &table)
+void CompressorLZW::createTableLZWcompress(map<string, int> &table)
 {
     for(int i = 0; i <= 255; i++)
     {
@@ -51,15 +52,16 @@ void createTableLZWcompress(map<string, int> &table)
     }
 }
 
-void compressLZW(QString &compressFileName, QString &lzwFileName)
+void CompressorLZW::compressLZW(QString &compressFileName, QString &lzwFileName)
 {
     map<string, int> table;
     vector<char> info;
-    readAllBytesLZWtextFile(compressFileName, info);
-    createTableLZWcompress(table);
-
     string p = "";
     string c = "";
+    readAllBytestextFile(compressFileName, info);
+    createTableLZWcompress(table);
+
+
     p += info[0];
     int code = table.size();
     vector<int> compressData;
@@ -84,7 +86,7 @@ void compressLZW(QString &compressFileName, QString &lzwFileName)
     writeCompressDataLZW(lzwFileName, compressData);
 }
 
-void decompressLZW(QString &lzwFileName, QString &decompressFileName)
+void CompressorLZW::decompressLZW(QString &lzwFileName, QString &decompressFileName)
 {
     ofstream file(decompressFileName.toStdString());
     map<int, string> table;
@@ -122,7 +124,7 @@ void decompressLZW(QString &lzwFileName, QString &decompressFileName)
     file.close();
 }
 
-void createTableLZWdecompress(map<int, string> &table)
+void CompressorLZW::createTableLZWdecompress(map<int, string> &table)
 {
     for (int i = 0; i <= 255; i++)
     {
@@ -132,7 +134,7 @@ void createTableLZWdecompress(map<int, string> &table)
     }
 }
 
-void readAllBytesFromLzwFile(QString &fileName, vector<int> &info)
+void CompressorLZW::readAllBytesFromLzwFile(QString &fileName, vector<int> &info)
 {
 
     ifstream file(fileName.toStdString(), ios::binary | ios::ate);

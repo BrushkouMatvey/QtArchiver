@@ -2,6 +2,9 @@
 #define ADD_WINDOW_H
 
 #include <QDialog>
+#include "src/lzw.h"
+#include "src/rle.h"
+#include "src/huffman.h"
 
 namespace Ui {
 class Add_window;
@@ -17,21 +20,16 @@ public:
 
 private slots:
     void on_BrowseButton_clicked();
-
     void on_AppendButton_clicked();
-
     void on_Ok_clicked();
 private:
     Ui::Add_window *ui;
     QStringList filesToCompress;
     QString direct;
     QString pathsForQLineEdit;
-    QStringList fileNames;
-
-private:
-
-    void compressHuffman(QString &compressFileName, QString &lzwFileName);
-
+    CompressorLZW compressorLzw;
+    CompressorRLE compressorRle;
+    CompressorHuffman compressorHuf;
 };
 
 #endif // ADD_WINDOW_H

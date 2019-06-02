@@ -80,6 +80,13 @@
     </widget>
    </item>
    <item>
+    <widget class="QRadioButton" name="RLERadioButton">
+     <property name="text">
+      <string>RLE decompress</string>
+     </property>
+    </widget>
+   </item>
+   <item>
     <widget class="QRadioButton" name="HuffmanRadioButton">
      <property name="text">
       <string>Huffman decompress</string>
@@ -118,13 +125,6 @@
       <widget class="QPushButton" name="OK">
        <property name="text">
         <string>OK</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="Cancel">
-       <property name="text">
-        <string>Cancel</string>
        </property>
       </widget>
      </item>

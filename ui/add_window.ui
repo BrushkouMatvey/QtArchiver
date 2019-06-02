@@ -91,10 +91,17 @@
    <item>
     <widget class="QRadioButton" name="LZWRadioButton">
      <property name="text">
-      <string>LZW (for .txt files)</string>
+      <string>LZW </string>
      </property>
      <property name="checked">
       <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QRadioButton" name="RLERadioButton">
+     <property name="text">
+      <string>RLE</string>
      </property>
     </widget>
    </item>
