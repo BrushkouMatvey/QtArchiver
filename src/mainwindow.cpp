@@ -55,6 +55,7 @@ void MainWindow::createFileSystemModel()
 
 void MainWindow::on_actionAdd_files_to_archive_triggered()
 {
+
     m_mapPages.value(ADD_WINDOW)->exec();
 }
 

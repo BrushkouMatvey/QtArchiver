@@ -6,6 +6,8 @@
 #include <QDebug>
 using namespace std;
 
+Node *CompressorHuffman::root;
+
 struct Compare
 {
     bool operator()(Node* left, Node* right) const
@@ -13,6 +15,21 @@ struct Compare
         return left->count < right->count;
     }
 };
+
+void CompressorHuffman::Print(Node *root, int depth)
+    {
+        if (!root) return;
+
+        if (root->symbol)
+        {
+            for (int i = 0; i < depth; i++)
+                qDebug() << ".";
+            qDebug() << root->symbol << endl;
+        }
+        else depth++;
+        Print(root->left, depth);
+        Print(root->right, depth);
+    }
 
 void CompressorHuffman::compressHuffman(QString &compressFileName, QString &hufFileName)
 {
@@ -46,10 +63,8 @@ void CompressorHuffman::compressHuffman(QString &compressFileName, QString &hufF
     }
     this->root = tree.front();
 
-    vector<bool> code;
-    map<char, vector<bool>> table;
-    buildTable(this->root, code, table);
-    ifstream fileCodes("codes.txt");
+    buildTable(this->root);
+    ifstream fileCodes(compressFileName.toStdString());
     ofstream fileCompressed(hufFileName.toStdString());
     int count; char buffer = 0;
     while(!fileCodes.eof())
@@ -73,20 +88,23 @@ void CompressorHuffman::compressHuffman(QString &compressFileName, QString &hufF
     fileCompressed.close();
 }
 
-void CompressorHuffman::buildTable(Node *root, std::vector<bool> &code, std::map<char, std::vector<bool>> &table)
+void CompressorHuffman::buildTable(Node *root)
 {
-    if (root->left)
+
+    if (root->left!=nullptr)
     {
-        code.push_back(0); // left
-        buildTable(root->left, code, table);
+        code.push_back(0);
+        buildTable(root->left);
     }
-    if (root->right)
+
+    if (root->right!=nullptr)
     {
-        code.push_back(1); // right
-        buildTable(root->right, code, table);
+        code.push_back(1);
+        buildTable(root->right);
     }
-    if (root->right == NULL && root->left == NULL)
-        table[root->symbol] = code;
+
+    if (root->left==nullptr && root->right==nullptr)
+        table[root->symbol]=code;
         code.pop_back();
 }
 
@@ -111,7 +129,7 @@ void CompressorHuffman::decompressHuffman(QString &hufFileName, QString &decompr
             p = p->right;
         else
             p = p->left;
-        if(p->left == NULL && p->right == NULL)
+        if(p->left == nullptr && p->right == nullptr)
         {
             decompressFile<<p->symbol;
             p = root;

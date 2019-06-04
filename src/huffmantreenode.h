@@ -14,6 +14,8 @@ public:
     {
         this->count = count;
         this->symbol = symbol;
+        this->left = nullptr;
+        this->right = nullptr;
     }
 
     Node(Node *left, Node *right)

@@ -8,11 +8,14 @@
 class CompressorHuffman
 {
 public:
+    void Print(Node *root, int depth);
     void compressHuffman(QString &compressFileName, QString &hufFileName);
     void decompressHuffman(QString &hufFileName, QString &decompressFileName);
-    void buildTable(Node *root, std::vector<bool> &code, std::map<char, std::vector<bool>> &table);
+    void buildTable(Node *root);
     bool sortNode(const Node *a, const Node *b);
 private:
-    Node *root;
+    std::vector<bool> code;
+    std::map<char, std::vector<bool>> table;
+    static Node *root;
 };
 #endif // HUFFMAN_H
