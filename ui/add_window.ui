@@ -108,7 +108,7 @@
    <item>
     <widget class="QRadioButton" name="HuffmanRadioButton">
      <property name="text">
-      <string>Huffman (for images)</string>
+      <string>Huffman</string>
      </property>
     </widget>
    </item>

@@ -6,6 +6,7 @@
 #include <QLineEdit>
 #include <QDebug>
 #include <QMessageBox>
+#include <QModelIndexList>
 
 #include "src/add_window.h"
 #include "src/extract_window.h"
@@ -25,6 +26,8 @@ MainWindow::MainWindow(QWidget *parent) :
     setQLineEditToToolBar();
     connect(toolBarLineEdit, SIGNAL(returnPressed()),this, SLOT(EnterPressed()));
     connect(this->ui->actionUp_on_level, SIGNAL(triggered()), this, SLOT(upOnLevel()));
+    connect(this->ui->actionView_file, SIGNAL(triggered()), this, SLOT(viewButtonTriggered()));
+    connect(this, SIGNAL(emitText(const QString)), m_mapPages.value(ADD_WINDOW), SLOT(recvText(const QString)));
 }
 
 MainWindow::~MainWindow()
@@ -55,8 +58,30 @@ void MainWindow::createFileSystemModel()
 
 void MainWindow::on_actionAdd_files_to_archive_triggered()
 {
+    QString path = toolBarLineEdit->text();
+    QStringList pathList = path.split(".");
 
-    m_mapPages.value(ADD_WINDOW)->exec();
+    QItemSelectionModel *selectionModel = ui->listView->selectionModel();
+    QModelIndexList selectedIndexes = selectionModel->selectedIndexes();
+    if(selectedIndexes.size() <= 0||
+            toolBarLineEdit->text() == "C:/"||
+            toolBarLineEdit->text() == "D:/")
+    {
+        m_mapPages.value(ADD_WINDOW)->exec();
+    }
+    else if(pathList.back() == "txt")
+    {
+        m_mapPages.value(ADD_WINDOW)->show();
+        qDebug()<<toolBarLineEdit->text();
+        emit emitText(toolBarLineEdit->text());
+    }
+
+    else
+    {
+        QMessageBox msgBox(QMessageBox::Warning, "Warning", "Choose .txt file");
+        msgBox.setWindowFlags(Qt::Dialog | Qt::CustomizeWindowHint | Qt::WindowTitleHint | Qt::WindowCloseButtonHint);
+        msgBox.exec();
+    }
 }
 
 void MainWindow::on_actionExtract_to_triggered()
@@ -138,7 +163,10 @@ void MainWindow::synchronizeListFromEdit()
 
 void MainWindow::on_actionDelete_file_triggered()
 {
-    if(toolBarLineEdit->text() == "" || toolBarLineEdit->text() == "C:/"||toolBarLineEdit->text() == "D:/")
+
+    if(toolBarLineEdit->text() == "" ||
+            toolBarLineEdit->text() == "C:/"||
+            toolBarLineEdit->text() == "D:/");
         return;
 
     QFileInfo fileInfo(toolBarLineEdit->text());

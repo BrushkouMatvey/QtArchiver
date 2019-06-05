@@ -30,7 +30,8 @@ public:
     void createFileSystemModel();
     void setQLineEditToToolBar();
     ~MainWindow();
-
+signals:
+    void emitText(const QString &text);
 private slots:
     void on_actionAdd_files_to_archive_triggered();
     void on_actionExtract_to_triggered();
@@ -40,8 +41,6 @@ private slots:
     void EnterPressed();
     void upOnLevel();
     void on_actionDelete_file_triggered();
-
-
 
 private:
     Ui::MainWindow *ui;

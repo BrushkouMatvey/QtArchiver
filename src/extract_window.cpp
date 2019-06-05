@@ -95,6 +95,10 @@ void Extract_window::on_OK_clicked()
     }
 }
 
+void Extract_window::recvText(const QString &text)
+{
+    this->ui->AppendLineEdit->setText(text);
+}
 
 
 

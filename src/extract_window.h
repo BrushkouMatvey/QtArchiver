@@ -22,6 +22,7 @@ private slots:
     void on_BrowseButton_clicked();
     void on_AppendButton_clicked();
     void on_OK_clicked();
+    void recvText(const QString &text);
 private:
     Ui::Extract_window *ui;
     QString direct;

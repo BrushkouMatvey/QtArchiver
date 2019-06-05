@@ -86,6 +86,10 @@ void Add_window::on_Ok_clicked()
     }
 }
 
+void Add_window::recvText(const QString &text)
+{
+    this->ui->AppendLineEdit->setText(text);
+}
 
 
 

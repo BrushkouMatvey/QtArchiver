@@ -6,7 +6,7 @@
 #include <QDebug>
 using namespace std;
 
-Node *CompressorHuffman::root;
+Node *CompressorHuffman::root = nullptr;
 
 struct Compare
 {
